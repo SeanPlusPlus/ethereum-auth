@@ -9,20 +9,22 @@ export const ConnectWallet = () => {
  
   async function getWeb3Modal() {
     let Torus = (await import('@toruslabs/torus-embed')).default
+    const providerOptions = {
+      torus: {
+        package: Torus
+      },
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          infuraId: '8cf3cad623da43f9a84ab5ac94230cf6'
+        },
+      },
+    }
+    console.log(providerOptions);
     const web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: false,
-      providerOptions: {
-        torus: {
-          package: Torus
-        },
-        walletconnect: {
-          package: WalletConnectProvider,
-          options: {
-            infuraId: '8cf3cad623da43f9a84ab5ac94230cf6'
-          },
-        },
-      },
+      providerOptions,
     })
     return web3Modal
   }
