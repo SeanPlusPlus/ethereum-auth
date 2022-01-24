@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
+import { DisneyWalletProvider } from '../context/DisneyWallet'
 import { GlobalContext } from '../context/GlobalState'
 import { disney } from '../utils/disney'
 
@@ -15,16 +16,20 @@ export const ConnectWallet = () => {
         display: {
           logo: `data:image/svg+xml;base64,${disney}`,
           name: "Disney OneId",
-          description: "Connect with Disney OneId"
+          description: "TODO: Connect with Disney OneId"
         },
-        package: {},
+        package: DisneyWalletProvider,
         options: {
-          apiKey: "EXAMPLE_PROVIDER_API_KEY"
+          apiKey: "DISNEY_ONE_ID_PROVIDER_API_KEY"
         },
         connector: async (ProviderPackage, options) => {
           const provider = new ProviderPackage(options);
-    
-          await provider.enable();
+
+          try {
+            await provider.enable();
+          } catch (error) {
+            console.log(error);
+          }
     
           return provider;
         }
@@ -36,7 +41,6 @@ export const ConnectWallet = () => {
         },
       },
     }
-    console.log(providerOptions);
     const web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: false,
@@ -48,12 +52,17 @@ export const ConnectWallet = () => {
   async function connect() {
     const web3Modal = await getWeb3Modal()
     const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const accounts = await provider.listAccounts()
-    setUser({
-      connection,
-      account: accounts[0],
-    });
+    let provider, accounts
+    try {
+      provider = new ethers.providers.Web3Provider(connection)
+      accounts = await provider.listAccounts()
+      setUser({
+        connection,
+        account: accounts[0],
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
