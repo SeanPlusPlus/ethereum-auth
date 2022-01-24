@@ -6,9 +6,16 @@ import { DisneyWalletProvider } from '../context/DisneyWallet'
 import { GlobalContext } from '../context/GlobalState'
 import { disney } from '../utils/disney'
 
+// components
+import { Info } from '../components/Info'
 
 export const ConnectWallet = () => {
-  const { setUser } = useContext(GlobalContext);
+  const {
+    setUser,
+    user: {
+      error,
+    }
+  } = useContext(GlobalContext);
  
   async function getWeb3Modal() {
     const providerOptions = {
@@ -61,11 +68,20 @@ export const ConnectWallet = () => {
         account: accounts[0],
       });
     } catch (error) {
-      console.log(error);
+      setUser({
+        error: true,
+      })
     }
   }
 
   return (
-    <button className="btn btn-primary" onClick={connect}>Connect Wallet</button>
+    <>
+      {error && (
+        <Info message="This provider is not yet supported" /> 
+      )}
+      {!error && (
+        <button className="btn btn-primary" onClick={connect}>Connect Wallet</button>
+      )}
+    </>
   )
 }
