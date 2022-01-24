@@ -1,5 +1,7 @@
 # Sign in with Ethereum authentication flow
 
+https://ethereum-auth.vercel.app/
+
 Based on this excellent tutorial from Nader Dabit: https://mirror.xyz/sha.eth/i6ry1Mxez53z91ef375sMe2rO1NvK2ipACyzKA4SR9g
 ### How it works
 
