@@ -1,16 +1,18 @@
 import React from 'react'
 
+const href = 'https://github.com/SeanPlusPlus/ethereum-auth'
+
 export const Footer = () => {
   return (
     <footer className="text-center pt-20">
-      Powered by 
+      Check out the source on 
       <a
-        href="https://twitter.com/seanplusplus"
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="link link-primary pl-1"
       >
-        SeanPlusPlus
+        GitHub
       </a>
     </footer> 
   )
