@@ -3,15 +3,31 @@ import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { GlobalContext } from '../context/GlobalState'
+import { disney } from '../utils/disney'
+
 
 export const ConnectWallet = () => {
   const { setUser } = useContext(GlobalContext);
  
   async function getWeb3Modal() {
-    let Torus = (await import('@toruslabs/torus-embed')).default
     const providerOptions = {
-      torus: {
-        package: Torus
+      "custom-example": {
+        display: {
+          logo: `data:image/svg+xml;base64,${disney}`,
+          name: "Disney OneId",
+          description: "Connect with Disney OneId"
+        },
+        package: {},
+        options: {
+          apiKey: "EXAMPLE_PROVIDER_API_KEY"
+        },
+        connector: async (ProviderPackage, options) => {
+          const provider = new ProviderPackage(options);
+    
+          await provider.enable();
+    
+          return provider;
+        }
       },
       walletconnect: {
         package: WalletConnectProvider,
