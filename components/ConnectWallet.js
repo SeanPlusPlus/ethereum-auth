@@ -79,9 +79,7 @@ export const ConnectWallet = () => {
       {error && (
         <Info message="This provider is not yet supported" /> 
       )}
-      {!error && (
-        <button className="btn btn-primary" onClick={connect}>Connect Wallet</button>
-      )}
+      <button className="btn btn-primary" onClick={connect}>Connect Wallet</button>
     </>
   )
 }
