@@ -22,12 +22,12 @@ export const ConnectWallet = () => {
       "custom-example": {
         display: {
           logo: `data:image/svg+xml;base64,${disney}`,
-          name: "Disney OneId",
-          description: "TODO: Connect with Disney OneId"
+          name: "Disney Wallet",
+          description: "TODO: Add connect with Disney Wallet"
         },
         package: DisneyWalletProvider,
         options: {
-          apiKey: "DISNEY_ONE_ID_PROVIDER_API_KEY"
+          apiKey: "DISNEY_WALLET_ID_PROVIDER_API_KEY"
         },
         connector: async (ProviderPackage, options) => {
           const provider = new ProviderPackage(options);
