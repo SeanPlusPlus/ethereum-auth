@@ -1,16 +1,5 @@
-import React, {
-  createContext,
-} from 'react';
-
-const initialState = {}
-
-const DisneyWallet = createContext(initialState);
-
-export const DisneyWalletProvider = ({
-  children
-}) => {
-  return ( <DisneyWallet.Provider value = {null} > {
-      children
-    } </DisneyWallet.Provider>
-  )
+export function DisneyWalletProvider() {
+  this.enable = function() {
+    console.log('Enable Disney Wallet Provider ...');
+  }
 }
