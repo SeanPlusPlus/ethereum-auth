@@ -68,9 +68,10 @@ export const ConnectWallet = () => {
         account: accounts[0],
       });
     } catch (error) {
-      setUser({
-        error: true,
-      })
+      window.location = 'https://disney-crypto-labs.vercel.app/';
+      // setUser({
+      //   error: true,
+      // })
     }
   }
 
